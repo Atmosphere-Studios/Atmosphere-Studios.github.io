@@ -3,163 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNO Game</title>
+    <title>Viking UNO</title>
     <style>
+        /* Import a Viking-themed font */
+        @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Skranji&display=swap');
+
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Skranji', cursive;
+            background: linear-gradient(135deg, #2c3e50, #4a6b8a);
             text-align: center;
             padding: 20px;
             margin: 0;
-            color: #333;
+            color: #e0e0e0;
         }
 
         h1 {
             font-size: 3rem;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .top-card {
             margin: 20px auto;
             padding: 20px;
-            background: #fff;
-            border: 2px solid #000;
+            background: #3e4a5e;
+            border: 4px solid #d4af37;
             border-radius: 20px;
             width: 200px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            font-size: 1.5rem;
             font-weight: bold;
+            color: #e0e0e0;
         }
 
         .hand {
             margin: 20px auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(62, 74, 94, 0.8);
+            border: 4px solid #d4af37;
             border-radius: 20px;
             width: 80%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         .card {
             display: inline-block;
             margin: 10px;
             padding: 15px;
-            background: #fff;
-            border: 2px solid #000;
+            background: #3e4a5e;
+            border: 4px solid #d4af37;
             border-radius: 15px;
             cursor: pointer;
-            font-size: 1.2rem; /* Adjusted font size */
+            font-size: 1.5rem;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.2s, box-shadow 0.2s;
-            width: 60px; /* Fixed width */
-            height: 90px; /* Fixed height */
+            width: 60px;
+            height: 90px;
             text-align: center;
-            line-height: 90px; /* Center text vertically */
-            color: #000;
-            overflow: hidden; /* Prevent text from overflowing */
-            white-space: nowrap; /* Prevent text from wrapping */
-            text-overflow: ellipsis; /* Add ellipsis if text overflows */
+            line-height: 90px;
+            color: #e0e0e0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         .card.RED {
-            background: #ff4d4d;
-            color: white;
+            background: #8b0000;
+            color: #e0e0e0;
         }
 
         .card.GREEN {
-            background: #4dff4d;
-            color: white;
+            background: #006400;
+            color: #e0e0e0;
         }
 
         .card.BLUE {
-            background: #4d4dff;
-            color: white;
+            background: #00008b;
+            color: #e0e0e0;
         }
 
         .card.YELLOW {
-            background: #ffff4d;
-            color: black;
+            background: #8b8000;
+            color: #e0e0e0;
         }
 
         .card.Wild, .card.Draw4 {
             background: #333;
-            color: white;
+            color: #e0e0e0;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
         }
 
         .button {
             padding: 10px 20px;
             margin: 10px;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: white;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            color: #2c3e50;
             border: none;
             border-radius: 25px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
         }
 
         .win-image {
             display: none;
             margin: 20px auto;
             border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         #pc-info {
             margin: 20px auto;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(62, 74, 94, 0.8);
+            border: 4px solid #d4af37;
             border-radius: 20px;
             width: 80%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         #pc-info h2 {
             font-size: 1.5rem;
-            color: #333;
+            color: #d4af37;
         }
 
         #pc-info p {
             font-size: 1.2rem;
-            color: #555;
+            color: #e0e0e0;
         }
 
         .card-input {
             margin: 20px auto;
             padding: 10px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(62, 74, 94, 0.8);
+            border: 4px solid #d4af37;
             border-radius: 20px;
             width: 80%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         .card-input input {
             padding: 10px;
-            border: 2px solid #ccc;
+            border: 2px solid #d4af37;
             border-radius: 10px;
             font-size: 1rem;
             width: 60%;
             margin-right: 10px;
+            background: #3e4a5e;
+            color: #e0e0e0;
         }
 
         .card-input button {
             padding: 10px 20px;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: white;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            color: #2c3e50;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -168,7 +177,7 @@
         }
 
         .card-input button:hover {
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            background: linear-gradient(135deg, #b8860b, #d4af37);
         }
 
         @keyframes fadeIn {
@@ -186,9 +195,7 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to UNO!</h1>
-    <h1 style="color: white;">This game was made by Will Baker and Quincey Buchanan</h1>
-
+    <h1>Welcome to Viking UNO!</h1>
     <p>Finish your cards first to win.</p>
 
     <div class="top-card fade-in" id="top-card">
