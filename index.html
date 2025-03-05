@@ -3,170 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viking UNO</title>
+    <title>UNO Game</title>
     <style>
-        /* Import a Viking-themed font */
-        @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Skranji&display=swap');
-
         body {
-            font-family: 'Skranji', cursive;
-            background: linear-gradient(135deg, #2c3e50, #4a6b8a);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #bdc3c7); /* Dark blue to light grey */
             text-align: center;
             padding: 20px;
             margin: 0;
-            color: #e0e0e0;
+            color: #333;
         }
 
         h1 {
             font-size: 3rem;
-            color: #d4af37;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .top-card {
             margin: 20px auto;
             padding: 20px;
-            background: #3e4a5e;
-            border: 4px solid #d4af37;
+            background: #fff;
+            border: 2px solid #000;
             border-radius: 20px;
             width: 200px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #e0e0e0;
         }
 
         .hand {
             margin: 20px auto;
             padding: 20px;
-            background: rgba(62, 74, 94, 0.8);
-            border: 4px solid #d4af37;
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             width: 80%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .card {
             display: inline-block;
             margin: 10px;
             padding: 15px;
-            background: #3e4a5e;
-            border: 4px solid #d4af37;
+            background: #fff;
+            border: 2px solid #000;
             border-radius: 15px;
             cursor: pointer;
+            font-size: 1.2rem;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s, box-shadow 0.2s;
             width: 60px;
             height: 90px;
             text-align: center;
             line-height: 90px;
-            color: #e0e0e0;
+            color: #000;
             overflow: hidden;
             white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         .card.RED {
-            background: #8b0000;
-            color: #e0e0e0;
+            background: #8b0000; /* Dark red */
+            color: white;
         }
 
         .card.GREEN {
-            background: #006400;
-            color: #e0e0e0;
+            background: #556b2f; /* Dark olive green */
+            color: white;
         }
 
         .card.BLUE {
-            background: #00008b;
-            color: #e0e0e0;
+            background: #4682b4; /* Steel blue */
+            color: white;
         }
 
         .card.YELLOW {
-            background: #8b8000;
-            color: #e0e0e0;
+            background: #d2b48c; /* Tan */
+            color: black;
         }
 
         .card.Wild, .card.Draw4 {
             background: #333;
-            color: #e0e0e0;
+            color: white;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         .button {
             padding: 10px 20px;
             margin: 10px;
-            background: linear-gradient(135deg, #d4af37, #b8860b);
-            color: #2c3e50;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
             border: none;
             border-radius: 25px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         .win-image {
             display: none;
             margin: 20px auto;
             border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         #pc-info {
             margin: 20px auto;
             padding: 15px;
-            background: rgba(62, 74, 94, 0.8);
-            border: 4px solid #d4af37;
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             width: 80%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         #pc-info h2 {
             font-size: 1.5rem;
-            color: #d4af37;
+            color: #333;
         }
 
         #pc-info p {
             font-size: 1.2rem;
-            color: #e0e0e0;
+            color: #555;
         }
 
         .card-input {
             margin: 20px auto;
             padding: 10px;
-            background: rgba(62, 74, 94, 0.8);
-            border: 4px solid #d4af37;
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             width: 80%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .card-input input {
             padding: 10px;
-            border: 2px solid #d4af37;
+            border: 2px solid #ccc;
             border-radius: 10px;
             font-size: 1rem;
             width: 60%;
             margin-right: 10px;
-            background: #3e4a5e;
-            color: #e0e0e0;
         }
 
         .card-input button {
             padding: 10px 20px;
-            background: linear-gradient(135deg, #d4af37, #b8860b);
-            color: #2c3e50;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -175,7 +168,7 @@
         }
 
         .card-input button:hover {
-            background: linear-gradient(135deg, #b8860b, #d4af37);
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
         }
 
         @keyframes fadeIn {
@@ -193,40 +186,41 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to Viking UNO!</h1>
-    <h3>Thank You for playing from Will Baker and Qunicey Buchanan</h3>
-    <p>Finish your cards first to win.</p>
+    <h1>Velkommen til Viking UNO!</h1>
+    <h1 style="color: white;">Dette spillet ble laget av Will Baker og Quincey Buchanan</h1>
+
+    <p>Fullfør kortene dine først for å vinne.</p>
 
     <div class="top-card fade-in" id="top-card">
-        Starting Card: <span id="top-card-display"></span>
+        Startkort: <span id="top-card-display"></span>
     </div>
 
     <div class="hand fade-in" id="player-hand">
-        <h2>Your Cards</h2>
+        <h2>Dine Kort</h2>
         <div id="player-cards"></div>
     </div>
 
     <div class="card-input fade-in" id="card-input">
-        <input type="number" id="card-index" placeholder="Enter card index (1, 2, 3...)" min="1">
-        <button onclick="playSelectedCard()">Play Card</button>
+        <input type="number" id="card-index" placeholder="Skriv inn kortindeks (1, 2, 3...)" min="1">
+        <button onclick="playSelectedCard()">Spill Kort</button>
     </div>
 
-    <button class="button fade-in" id="pull-button">Pull</button>
+    <button class="button fade-in" id="pull-button">Trekk</button>
 
     <div id="pc-info" class="fade-in">
-        <h2>PC's Turn</h2>
-        <p>PC has <span id="pc-cards-count"></span> cards remaining.</p>
+        <h2>PC's Tur</h2>
+        <p>PC har <span id="pc-cards-count"></span> kort igjen.</p>
     </div>
 
-    <img src="nugget.png" alt="Winner" class="win-image fade-in" id="win-image">
+    <img src="nugget.png" alt="Vinner" class="win-image fade-in" id="win-image">
 
     <script>
         const color = ['RED', 'GREEN', 'BLUE', 'YELLOW'];
         const rank = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Skip', 'Reverse', 'Draw2', 'Draw4', 'Wild'];
         const ctype = {
             '0': 'number', '1': 'number', '2': 'number', '3': 'number', '4': 'number', '5': 'number', '6': 'number',
-            '7': 'number', '8': 'number', '9': 'number', 'Skip': 'action', 'Reverse': 'action', 'Draw-2': 'action',
-            'Draw-4': 'action_nocolor', 'Wild': 'action_nocolor'
+            '7': 'number', '8': 'number', '9': 'number', 'Skip': 'action', 'Reverse': 'action', 'Draw2': 'action',
+            'Draw4': 'action_nocolor', 'Wild': 'action_nocolor'
         };
 
         class Card {
@@ -347,7 +341,6 @@
                 const cardDiv = document.createElement('div');
                 cardDiv.className = `card ${card.getColorClass()}`;
                 cardDiv.textContent = card.getDisplayText();
-                adjustFontSize(cardDiv); // Adjust font size based on text length
                 cardDiv.onclick = () => playCard(index);
                 playerCardsDiv.appendChild(cardDiv);
             });
@@ -357,21 +350,12 @@
             }
         }
 
-        function adjustFontSize(cardDiv) {
-            const textLength = cardDiv.textContent.length;
-            if (textLength > 4) {
-                cardDiv.style.fontSize = '1rem'; // Smaller font for longer text
-            } else {
-                cardDiv.style.fontSize = '1.5rem'; // Larger font for shorter text
-            }
-        }
-
         function playSelectedCard() {
             const index = parseInt(document.getElementById('card-index').value) - 1;
             if (index >= 0 && index < playerHand.getCardCount()) {
                 playCard(index);
             } else {
-                alert('Invalid card index!');
+                alert('Ugyldig kortindeks!');
             }
         }
 
@@ -382,13 +366,13 @@
                 topCard = card;
                 applyCardEffect(card);
                 if (playerHand.getCardCount() === 0) {
-                    endGame('Player');
+                    endGame('Spiller');
                     return;
                 }
                 turn = 'PC';
                 updateUI();
             } else {
-                alert('Invalid card!');
+                alert('Ugyldig kort!');
             }
         }
 
@@ -398,23 +382,23 @@
 
         function applyCardEffect(card) {
             if (card.rank === 'Skip') {
-                turn = 'Player';
+                turn = 'Spiller';
             } else if (card.rank === 'Reverse') {
-                turn = 'Player';
+                turn = 'Spiller';
             } else if (card.rank === 'Draw2') {
                 for (let i = 0; i < 2; i++) {
                     pcHand.addCard(deck.deal());
                 }
-                turn = 'Player';
+                turn = 'Spiller';
             } else if (card.rank === 'Draw4') {
                 for (let i = 0; i < 4; i++) {
                     pcHand.addCard(deck.deal());
                 }
-                const newColor = prompt('Change color to (RED, GREEN, BLUE, YELLOW):').toUpperCase();
+                const newColor = prompt('Endre farge til (RED, GREEN, BLUE, YELLOW):').toUpperCase();
                 topCard.color = newColor;
-                turn = 'Player';
+                turn = 'Spiller';
             } else if (card.rank === 'Wild') {
-                const newColor = prompt('Change color to (RED, GREEN, BLUE, YELLOW):').toUpperCase();
+                const newColor = prompt('Endre farge til (RED, GREEN, BLUE, YELLOW):').toUpperCase();
                 topCard.color = newColor;
                 turn = 'PC';
             }
@@ -441,15 +425,15 @@
                 pcHand.addCard(deck.deal());
             }
 
-            turn = 'Player';
+            turn = 'Spiller';
             updateUI();
         }
 
         function endGame(winner) {
-            if (winner === 'Player') {
+            if (winner === 'Spiller') {
                 document.getElementById('win-image').style.display = 'block';
             }
-            alert(`${winner} wins!`);
+            alert(`${winner} vinner!`);
             initializeGame();
         }
 
@@ -464,5 +448,6 @@
 
         initializeGame();
     </script>
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>
