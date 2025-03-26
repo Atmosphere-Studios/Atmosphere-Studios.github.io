@@ -333,23 +333,32 @@
 
             playerHand = new Hand();
             for (let i = 0; i < 7; i++) {
-                playerHand.addCard(deck.deal());
+            playerHand.addCard(deck.deal());
             }
 
             pcHand = new Hand();
             for (let i = 0; i < 7; i++) {
-                pcHand.addCard(deck.deal());
+            pcHand.addCard(deck.deal());
             }
 
             topCard = deck.deal();
             while (topCard.cardtype !== 'number') {
-                topCard = deck.deal();
+            topCard = deck.deal();
             }
 
-            turn = Math.random() < 0.5 ? 'Player' : 'PC';
+            turn = Math.random() < 0.5 ? 'Spiller' : 'PC';
 
             updateUI();
         }
+
+        // Add a back button functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const backButton = document.createElement('a');
+            backButton.href = "index.html"; // Change this to the desired back URL
+            backButton.className = "back-button";
+            backButton.textContent = "Tilbake";
+            document.body.appendChild(backButton);
+        });
 
         function updateUI() {
             document.getElementById('top-card-display').textContent = topCard.getDisplayText();
