@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <style>
+        li a {
+            display: block;
+            color: black;
+            text-decoration: none;
+            padding: 5px;
+            border: 1px solid rgba(138, 43, 226, 0.5);
+            border-radius: 10px;
+        }
+
+        li a:hover {
+            background-color: rgba(138, 43, 226, 0.5);
+            color: white;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: rgba(240, 128, 128, 0.5);
+            border-radius: 10px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .contact-form {
+            margin-top: 20px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .contact-form button {
+            padding: 10px 20px;
+            background-color: rgba(138, 43, 226, 0.5);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: rgba(138, 43, 226, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="Services.html">Services</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form action="https://formsubmit.co/6d0b83b16147de9b28a1a1a91c03739a" method="POST">
+            <input type="hidden" name="_captcha" value="true">
+            <input type="hidden" name="_autoresponse" value="Thank you for contacting us! We will reply soon.">
+            <input type="hidden" name="_next" value="thank-you.html">
+            <input type="hidden" name="_subject" value="New Contact Form Submission">
+            
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        
+            <button type="submit">Send</button>
+        </form>
+        
+    </div>
+</body>
+</html>
