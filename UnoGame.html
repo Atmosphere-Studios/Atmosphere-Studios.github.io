@@ -357,6 +357,63 @@
             backButton.href = "index.html"; // Change this to the desired back URL
             backButton.className = "back-button";
             backButton.textContent = "Back";
+
+            const translateButton = document.createElement('button');
+            translateButton.textContent = "Translate";
+            translateButton.className = "button";
+            translateButton.style.position = "absolute";
+            translateButton.style.top = "10px";
+            translateButton.style.right = "10px";
+            translateButton.onclick = () => toggleTranslation();
+            document.body.appendChild(translateButton);
+
+            let isTranslated = false;
+
+            function toggleTranslation() {
+                const elementsToTranslate = [
+                    { id: 'top-card', en: 'Starting Card:', no: 'Startkort:' },
+                    { id: 'player-hand', en: 'Your Cards', no: 'Dine Kort' },
+                    { id: 'card-index', en: 'Enter card index (1, 2, 3...)', no: 'Skriv inn kortindeks (1, 2, 3...)' },
+                    { id: 'pull-button', en: 'Draw', no: 'Trekk' },
+                    { id: 'pc-info', en: "PC's Turn", no: 'PCs Tur' },
+                    { id: 'pc-cards-count', en: 'cards left.', no: 'kort igjen.' },
+                    { id: 'win-image', en: 'Winner', no: 'Vinner' },
+                ];
+
+                elementsToTranslate.forEach(({ id, en, no }) => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        if (id === 'card-index') {
+                            element.placeholder = isTranslated ? no : en;
+                        } else {
+                            element.textContent = isTranslated ? no : en;
+                        }
+                    }
+                });
+
+                const headings = document.querySelectorAll('h1, h4, p');
+                headings.forEach(heading => {
+                    if (heading.textContent.includes('Velkommen')) {
+                        heading.textContent = isTranslated
+                            ? 'Velkommen til Viking UNO!'
+                            : 'Welcome to Viking UNO!';
+                    } else if (heading.textContent.includes('Dette spillet ble laget')) {
+                        heading.textContent = isTranslated
+                            ? 'Dette spillet ble laget av Will Baker og Quincey Buchanan'
+                            : 'This game was created by Will Baker and Quincey Buchanan';
+                    } else if (heading.textContent.includes('Fullfør kortene dine først')) {
+                        heading.textContent = isTranslated
+                            ? 'Fullfør kortene dine først for å vinne.'
+                            : 'Finish your cards first to win.';
+                    } else if (heading.textContent.includes('Please do not use our code')) {
+                        heading.textContent = isTranslated
+                            ? 'Please do not use our code without permission'
+                            : 'Vennligst ikke bruk koden vår uten tillatelse';
+                    }
+                });
+
+                isTranslated = !isTranslated;
+            }
             document.body.appendChild(backButton);
         });
 
