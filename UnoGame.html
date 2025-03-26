@@ -385,6 +385,8 @@
                     if (element) {
                         if (id === 'card-index') {
                             element.placeholder = isTranslated ? no : en;
+                        } else if (id === 'top-card-display') {
+                            // Skip translating game logic-related elements
                         } else {
                             element.textContent = isTranslated ? no : en;
                         }
