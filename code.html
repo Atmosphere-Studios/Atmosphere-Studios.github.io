@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local Code Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+</head>
+
+<body>
+  <h1>Offline Code Assistant</h1>
+  <textarea id="prompt" placeholder="Describe what you want the code to do..."></textarea>
+  <select id="language">
+    <option value="js">JavaScript</option>
+    <option value="python">Python</option>
+  </select>
+  <button onclick="generateCode()">Generate Code</button>
+  <pre id="output"></pre>
+  <script src="main.js" type="module"></script>
+</body>
+</html>
